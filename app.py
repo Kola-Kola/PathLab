@@ -1,5 +1,6 @@
 import os, sys
 import os.path as P
+import shutil
 
 path = os.getcwd()
 app = path + '/app'
@@ -20,13 +21,17 @@ def createFile(name, auth):
     os.open(name, auth)
     os.close(0)
 
+
+def createFolder(name):
+    os.mkdir(name)
+
 if not (P.exists(path + '/app')):
-    os.mkdir('app')
+    createFolder('app')
     os.chdir(app)
-    os.mkdir('img-content')
-    os.mkdir('img-layout')
-    os.mkdir('js')
-    os.mkdir('css')
+    createFolder('img-content')
+    createFolder('img-layout')
+    createFolder('js')
+    createFolder('css')
     os.chdir(path + '/app')
     createFile('index.html', os.O_RDWR|os.O_CREAT)
     os.chdir(path + '/app/css')
@@ -35,5 +40,9 @@ if not (P.exists(path + '/app')):
     createFile('app.js', os.O_RDWR | os.O_CREAT)
 else:
     errorStr('Folders already exist')
-    choice = input('You want remove folder ? (Y/N)')
-    print(choice)
+    removeFolder = str(input('You want to remove this folder ? (0/1)'))
+    if removeFolder == '0':
+        shutil.rmtree(app)
+        print('Folder removed successfuly')
+    else:
+        print('Error')
