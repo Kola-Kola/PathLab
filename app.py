@@ -1,6 +1,7 @@
 import os, sys
 import os.path as P
 import shutil
+import subprocess
 
 path = os.getcwd()
 app = path + '/app'
@@ -25,24 +26,46 @@ def createFile(name, auth):
 def createFolder(name):
     os.mkdir(name)
 
-if not (P.exists(path + '/app')):
-    createFolder('app')
-    os.chdir(app)
+
+def createFolderDefault():
     createFolder('img-content')
     createFolder('img-layout')
     createFolder('js')
-    createFolder('css')
-    os.chdir(path + '/app')
-    createFile('index.html', os.O_RDWR|os.O_CREAT)
-    os.chdir(path + '/app/css')
-    createFile('styles.css', os.O_RDWR|os.O_CREAT)
+    createFolder('styles')
+    os.chdir(path + '/app/styles')
+    createFile('styles.scss', os.O_WRONLY | os.O_CREAT)
+    createFile('styles.css', os.O_RDWR | os.O_CREAT)
     os.chdir(path + '/app/js')
     createFile('app.js', os.O_RDWR | os.O_CREAT)
-else:
-    errorStr('Folders already exist')
-    removeFolder = str(input('You want to remove this folder ? (0/1)'))
-    if removeFolder == '0':
-        shutil.rmtree(app)
-        print('Folder removed successfuly')
+    os.chdir(path + '/app')
+    createFile('index.html', os.O_RDWR | os.O_CREAT)
+
+print('\033[1;32;40m')
+print('PathLab - Simply generator Files/Folders for a fast Workflow \n\n ' )
+print('If you need to validate a step press 0, or if you want to exit press 1 \n\n')
+print('Thanks you to use this script, its made by Jonathan IBOR student @HETIC \n\n')
+
+start = str(input('Ready to start ? (0/1) : '))
+sass = str(input('Want to launch SASS Watcher ? (0/1) : '))
+if start == '0':
+    if not (P.exists(path + '/app')):
+        createFolder('app')
+        os.chdir(app)
+        createFolderDefault()
+        if sass == '0' :
+            os.chdir(path + '/app/styles')
+            os.system('sass --watch styles.scss:styles.css')
+        else:
+            os.chdir(path + '/app/styles')
+            os.remove('styles.scss')
+
     else:
-        print('Error')
+        errorStr('Folders already exist')
+        removeFolder = str(input('You want to remove this folder ? (0/1)'))
+        if removeFolder == '0':
+            shutil.rmtree(app)
+            print('Folder removed successfuly')
+        else:
+            print("Error, can't remove this folder. Try again")
+else:
+    errorStr('Thanks you ! Next time maybe.')
