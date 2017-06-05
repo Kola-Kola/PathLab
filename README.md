@@ -2,7 +2,7 @@
 
 ### Installation
 
-Very simple and quickly, you just need to put then app.py in what folder you want, after that you need to go in CLI.
+Very simple and quick, then you need to put then app.py in the folder that you want, after that you need to go in CLI.
 
 ````
 python app.py
@@ -11,8 +11,9 @@ python app.py
 
 ### After Installation
 
-That scrip generate for you a folder (-> APP). 
-This folder folder, contain some other folder and file for good start your website.
+After installation ;
+That script generates a folder (--> APP).
+This folder contains some other folders and files which will help you to create your website in a good way.
 All files are empty.
 
 ### 1.0
@@ -21,6 +22,6 @@ All files are empty.
     - Don't want SCSS file in your project ? That script remove from app folder
     - File watcher run automatically
 
-I you want to contribute, and add some function of this script you can fork 
+If you want to contribute, and add some functions of this script you can fork
 
 @Kola-Kola
