@@ -33,15 +33,6 @@ def createFolderDefault():
     createFolder('js')
     createFolder('styles')
     os.chdir(path + '/app/styles')
-<<<<<<< HEAD
-=======
-    createFile('styles.scss', os.O_WRONLY | os.O_CREAT)
-    createFile('styles.css', os.O_RDWR | os.O_CREAT)
-
-    sty = os.open('styles.css', os.O_RDWR | os.O_CREAT)
-    os.write(sty,'@charset "UTF-8";')
-    os.close(sty)
->>>>>>> d6b773f39deddcd51188611b736a00595638c7df
 
     os.chdir(path + '/app/js')
     createFile('app.js', os.O_RDWR | os.O_CREAT)
@@ -49,7 +40,6 @@ def createFolderDefault():
     createFile('index.html', os.O_RDWR | os.O_CREAT)
 
     idx = os.open('index.html', os.O_RDWR | os.O_CREAT)
-<<<<<<< HEAD
     os.write(idx,bytes(
         '<!DOCTYPE html>\n<html>\n  <head>\n '
         '<meta charset="utf-8">\n '
@@ -74,12 +64,6 @@ def editStyle(text):
     os.close(css)
 
 
-=======
-    os.write(idx,'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n    <link rel="stylesheet" href="styles/styles.css">\n    <title></title>\n  </head>\n  <body>\n\n\n  </body>\n</html>')
-    os.close(idx)
-
-
->>>>>>> d6b773f39deddcd51188611b736a00595638c7df
 print('\033[1;32;40m')
 print('PathLab - Simply generator Files/Folders for a fast Workflow \n\n ' )
 print('If you need to validate a step press 0, or if you want to exit press 1 \n\n')
