@@ -11,7 +11,7 @@ def errorStr(typeError):
     print('\033[1;31;40m')
     print(typeError)
     print(' _____   _____    _____    _____   _____ ')
-    print("| ____| |  _  \  |  _  \  /  _  \ |  _  \ ")
+    print('| ____| |  _  \  |  _  \  /  _  \ |  _  \ ')
     print('| |__   | |_| |  | |_| |  | | | | | |_| |')
     print('|  __|  |  _  /  |  _  /  | | | | |  _  /')
     print('| |___  | | \ \  | | \ \  | |_| | | | \ \ ')
@@ -35,10 +35,20 @@ def createFolderDefault():
     os.chdir(path + '/app/styles')
     createFile('styles.scss', os.O_WRONLY | os.O_CREAT)
     createFile('styles.css', os.O_RDWR | os.O_CREAT)
+
+    sty = os.open('styles.css', os.O_RDWR | os.O_CREAT)
+    os.write(sty,'@charset "UTF-8";')
+    os.close(sty)
+
     os.chdir(path + '/app/js')
     createFile('app.js', os.O_RDWR | os.O_CREAT)
     os.chdir(path + '/app')
     createFile('index.html', os.O_RDWR | os.O_CREAT)
+
+    idx = os.open('index.html', os.O_RDWR | os.O_CREAT)
+    os.write(idx,'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n    <link rel="stylesheet" href="styles/styles.css">\n    <title></title>\n  </head>\n  <body>\n\n\n  </body>\n</html>')
+    os.close(idx)
+
 
 print('\033[1;32;40m')
 print('PathLab - Simply generator Files/Folders for a fast Workflow \n\n ' )
