@@ -27,7 +27,7 @@ def createFolder(name):
     os.mkdir(name)
 
 
-def createFolderDefault():
+def createFolderDefault(ext):
     createFolder('img-content')
     createFolder('img-layout')
     createFolder('js')
@@ -37,7 +37,32 @@ def createFolderDefault():
     os.chdir(path + '/app/js')
     createFile('app.js', os.O_RDWR | os.O_CREAT)
     os.chdir(path + '/app')
-    createFile('index.html', os.O_RDWR | os.O_CREAT)
+    createFile('index.' + ext, os.O_RDWR | os.O_CREAT)
+
+    idx = os.open('index.' + ext, os.O_RDWR | os.O_CREAT)
+    os.write(idx,bytes(
+        '<!DOCTYPE html>\n<html>\n  <head>\n '
+        '<meta charset="utf-8">\n '
+        '<link rel="stylesheet" href="styles/styles.css">\n '
+        '<title></title>\n  </head>\n  <body>\n\n\n  </body>\n</html>'))
+    os.close(idx)
+
+
+def editStyle(text):
+    css = os.open(text, os.O_RDWR | os.O_CREAT)
+    os.write(css,bytes('@charset "UTF-8";\n\n\n'
+                       '/*/////////////////////////////////////////////////////////////////////////////'
+                       '\n'
+                       '\n'
+                       '                                    Commons \n'
+                       '\n'
+                       '\n'
+                       '/////////////////////////////////////////////////////////////////////////////*/\n'
+                       '\n'
+                       ' *{\n '
+                       'margin: 0;\n padding: 0;\n}\n*,*:before,*:after {\n   box-sizing:border-box\n}'))
+    os.close(css)
+
 
     idx = os.open('index.html', os.O_RDWR | os.O_CREAT)
     os.write(idx,bytes(
@@ -71,11 +96,16 @@ print('Thanks you to use this script, its made by Jonathan IBOR student @HETIC \
 
 start = str(input('Ready to start ? (0/1) : '))
 sass = str(input('Want to launch SASS Watcher ? (0/1) : '))
+extensionFile = str(input('Want to launch PHP or HTML ? 0->php // 1->html: '))
+
 if start == '0':
     if not (P.exists(path + '/app')):
         createFolder('app')
         os.chdir(app)
-        createFolderDefault()
+        if extensionFile == '0':
+            createFolderDefault('php')
+        else:
+            createFolderDefault('html')
         if sass == '0' :
             os.chdir(path + '/app/styles')
             editStyle('styles.scss')
