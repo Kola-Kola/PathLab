@@ -69,20 +69,22 @@ print('PathLab - Simply generator Files/Folders for a fast Workflow \n\n ' )
 print('If you need to validate a step press 0, or if you want to exit press 1 \n\n')
 print('Thanks you to use this script, its made by Jonathan IBOR student @HETIC \n\n')
 
-start = str(input('Ready to start ? (0/1) : '))
-sass = str(input('Want to launch SASS Watcher ? (0/1) : '))
-extensionFile = str(input('Choose your extension 0 -> php // 1 -> html: '))
+start = str(raw_input('Ready to start ? (Yes/No) : '))
+sass = str(raw_input('Want to launch SASS Watcher ? (Yes/No) : '))
+extensionFile = str(raw_input('Choose your extension (php/html): '))
 
-if start == '0':
+if start == 'yes'.lower():
     if not (P.exists(path + '/app')):
         createFolder('app')
         os.chdir(app)
-        if extensionFile == '0':
+        if extensionFile == 'php':
             createFolderDefault('php')
-        else:
+        elif extensionFile == 'html':
             createFolderDefault('html')
+        else:
+            exit()
 
-        if sass == '0' :
+        if sass == 'yes'.lower():
             os.chdir(path + '/app/styles')
             editStyle('styles.scss')
             os.system('sass --watch styles.scss:styles.css')
@@ -93,8 +95,8 @@ if start == '0':
 
     else:
         errorStr('Folders already exist')
-        removeFolder = str(input('You want to remove this folder ? (0/1)'))
-        if removeFolder == '0':
+        removeFolder = str(raw_input('You want to remove this folder ? (0/1)'))
+        if removeFolder == 'yes'.lower():
             shutil.rmtree(app)
             print('Folder removed successfuly')
         else:
