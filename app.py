@@ -27,7 +27,7 @@ def createFolder(name):
     os.mkdir(name)
 
 
-def createFolderDefault():
+def createFolderDefault(ext):
     createFolder('img-content')
     createFolder('img-layout')
     createFolder('js')
@@ -37,9 +37,9 @@ def createFolderDefault():
     os.chdir(path + '/app/js')
     createFile('app.js', os.O_RDWR | os.O_CREAT)
     os.chdir(path + '/app')
-    createFile('index.html', os.O_RDWR | os.O_CREAT)
+    createFile('index.' + ext, os.O_RDWR | os.O_CREAT)
 
-    idx = os.open('index.html', os.O_RDWR | os.O_CREAT)
+    idx = os.open('index.' + ext, os.O_RDWR | os.O_CREAT)
     os.write(idx,bytes(
         '<!DOCTYPE html>\n<html>\n  <head>\n '
         '<meta charset="utf-8">\n '
@@ -71,11 +71,17 @@ print('Thanks you to use this script, its made by Jonathan IBOR student @HETIC \
 
 start = str(input('Ready to start ? (0/1) : '))
 sass = str(input('Want to launch SASS Watcher ? (0/1) : '))
+extensionFile = str(input('Choose your extension 0 -> php // 1 -> html: '))
+
 if start == '0':
     if not (P.exists(path + '/app')):
         createFolder('app')
         os.chdir(app)
-        createFolderDefault()
+        if extensionFile == '0':
+            createFolderDefault('php')
+        else:
+            createFolderDefault('html')
+
         if sass == '0' :
             os.chdir(path + '/app/styles')
             editStyle('styles.scss')
