@@ -24,6 +24,7 @@ This folder contains some other folders and files which will help you to create 
 ### 1.1.0
 
     - Index.html/styles.scss or styles.css are not empty, you have a basic template.
+    - You can choose now between php or html extension
 
 If you want to contribute, and add some functions of this script you can fork
 
