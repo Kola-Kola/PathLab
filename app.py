@@ -40,7 +40,7 @@ def createFolderDefault(ext):
     createFile('index.' + ext, os.O_RDWR | os.O_CREAT)
 
     idx = os.open('index.' + ext, os.O_RDWR | os.O_CREAT)
-    os.write(idx,bytes(
+    os.write(idx, bytes(
         '<!DOCTYPE html>\n<html>\n  <head>\n '
         '<meta charset="utf-8">\n '
         '<link rel="stylesheet" href="styles/styles.css">\n '
@@ -50,7 +50,7 @@ def createFolderDefault(ext):
 
 def editStyle(text):
     css = os.open(text, os.O_RDWR | os.O_CREAT)
-    os.write(css,bytes('@charset "UTF-8";\n\n\n'
+    os.write(css, bytes('@charset "UTF-8";\n\n\n'
                        '/*/////////////////////////////////////////////////////////////////////////////'
                        '\n'
                        '\n'
@@ -95,7 +95,7 @@ if start == 'yes'.lower():
 
     else:
         errorStr('Folders already exist')
-        removeFolder = str(raw_input('You want to remove this folder ? (0/1)'))
+        removeFolder = str(raw_input('You want to remove this folder ? (Yes/No)'))
         if removeFolder == 'yes'.lower():
             shutil.rmtree(app)
             print('Folder removed successfuly')
